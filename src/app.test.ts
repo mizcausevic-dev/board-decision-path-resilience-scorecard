@@ -9,6 +9,8 @@ describe("board-decision-path-resilience-scorecard app", () => {
     const response = await request(app).get("/");
     expect(response.status).toBe(200);
     expect(response.text).toContain("Board Decision Path Resilience Scorecard");
+    expect(response.text).toContain("Product depth");
+    expect(response.text).toContain("What these repos have in common");
   });
 
   it("serves the resilience lanes route", async () => {
@@ -40,6 +42,24 @@ describe("board-decision-path-resilience-scorecard app", () => {
     const response = await request(app).get("/api/payload");
     expect(response.status).toBe(200);
     expect(response.body.report.summary.items).toBeGreaterThan(0);
+  });
+
+  it("serves all public JSON APIs", async () => {
+    const routes = [
+      "/api/dashboard/summary",
+      "/api/resilience-lanes",
+      "/api/failure-thresholds",
+      "/api/reinforcement-posture",
+      "/api/risk-map",
+      "/api/verification",
+      "/api/sample",
+      "/api/payload"
+    ];
+
+    for (const route of routes) {
+      const response = await request(app).get(route);
+      expect(response.status).toBe(200);
+    }
   });
 
   it("serves the resilience lanes API", async () => {

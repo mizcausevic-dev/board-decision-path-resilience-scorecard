@@ -13,6 +13,16 @@ describe("render", () => {
     expect(renderPathResilienceOverview()).toContain("Board Decision Path Resilience Scorecard");
   });
 
+  it("renders the product depth and shared Kinetic Gain pattern", () => {
+    const html = renderPathResilienceOverview();
+
+    expect(html).toContain("Product depth");
+    expect(html).toContain("What these repos have in common");
+    expect(html).toContain("portfolio.kineticgain.com");
+    expect(html).toContain("suite.kineticgain.com");
+    expect(html).toContain("board-decision-path-resilience-scorecard");
+  });
+
   it("renders the resilience lanes route", () => {
     expect(renderResilienceLanes()).toContain("/resilience-lanes");
   });

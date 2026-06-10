@@ -10,6 +10,7 @@ import {
 
 const productTitle = "Board Decision Path Resilience Scorecard";
 const domain = "https://resilience.kineticgain.com";
+const repoUrl = "https://github.com/mizcausevic-dev/board-decision-path-resilience-scorecard";
 
 function escapeHtml(value: string) {
   return value
@@ -102,6 +103,26 @@ function shell(title: string, path: string, body: string, description: string) {
       .metric-copy { margin-top: 10px; color: var(--muted); line-height: 1.5; }
       .section { margin-top: 24px; }
       .grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+      .proof-band {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .proof-card {
+        background:
+          linear-gradient(135deg, rgba(103, 224, 190, 0.10), transparent 42%),
+          rgba(16, 32, 50, 0.82);
+        border: 1px solid rgba(125, 196, 255, 0.14);
+        border-radius: 22px;
+        padding: 20px;
+      }
+      .proof-card strong {
+        display: block;
+        color: var(--text);
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
       .card h3 { margin: 12px 0 10px; font-size: 30px; line-height: 1.05; }
       .card p, li { color: var(--muted); line-height: 1.6; }
       .table-wrap { overflow-x: auto; }
@@ -134,7 +155,9 @@ function shell(title: string, path: string, body: string, description: string) {
       <div class="footer">
         <span>${productTitle}</span>
         <a href="${domain}">${domain.replace("https://", "")}</a>
-        <a href="https://github.com/mizcausevic-dev/">GitHub</a>
+        <a href="${repoUrl}">GitHub repo</a>
+        <a href="https://portfolio.kineticgain.com/">Portfolio</a>
+        <a href="https://suite.kineticgain.com/">Suite</a>
         <a href="https://www.linkedin.com/in/mirzacausevic/">LinkedIn</a>
         <a href="https://kineticgain.com/">Kinetic Gain</a>
       </div>
@@ -157,6 +180,32 @@ function navLinks(path: string) {
       return `<a${active} href="${href}">${label}</a>`;
     })
     .join("");
+}
+
+function productDepthSection() {
+  return `<section class="section">
+      <span class="eyebrow">Product depth</span>
+      <h2>Board resilience, not another status dashboard.</h2>
+      <p class="lede">This scorecard helps leaders decide whether a critical decision path can absorb another cycle without creating fresh delay, rework, or confidence loss. It gives executives a common language for where resilience is weak, what reinforcement should happen first, and how much value is exposed if the path is left brittle.</p>
+      <div class="proof-band">
+        <div class="proof-card"><strong>Buyer value</strong><p>Turns fragile operating paths into a board-ready investment sequence: reinforce the lanes with the lowest tolerance and highest value at stake before another review cycle creates avoidable damage.</p></div>
+        <div class="proof-card"><strong>Technical proof</strong><p>Typed fixtures, deterministic scoring, prerendered HTML, JSON APIs, CLI output, and screenshot assets all come from the same modeled packet instead of hand-written marketing copy.</p></div>
+        <div class="proof-card"><strong>GTM story</strong><p>Useful for diligence, governance, transformation, and post-incident recovery narratives where leaders need to explain what will hold, what will break, and why the next investment is defensible.</p></div>
+      </div>
+    </section>`;
+}
+
+function commonPatternSection() {
+  return `<section class="section">
+      <span class="eyebrow">Common operating pattern</span>
+      <h2>What these repos have in common.</h2>
+      <p class="lede">Kinetic Gain executive-intelligence repos are designed as reusable proof surfaces: one board-facing question, one operator-readable model, one public static surface, and one verification trail that makes the work reviewable without requiring live credentials.</p>
+      <div class="grid">
+        <article class="card"><div class="chip">Decision layer</div><h3>Plain-English executive framing.</h3><p>Each product starts with a board-level decision: where exposure sits, where money or time is leaking, and which intervention should move first.</p></article>
+        <article class="card"><div class="chip">Evidence layer</div><h3>Structured proof instead of screenshots.</h3><p>The UI, APIs, CLI output, docs, and screenshots are generated from the same structured sample so the repo demonstrates repeatability, not just presentation.</p></article>
+        <article class="card"><div class="chip">Portfolio layer</div><h3>Connected to the broader estate.</h3><p>Footer and metadata links tie the repo back to the portfolio atlas, suite landing surface, and Kinetic Gain public estate for easier buyer and crawler navigation.</p></article>
+      </div>
+    </section>`;
 }
 
 export function renderPathResilienceOverview() {
@@ -207,7 +256,9 @@ export function renderPathResilienceOverview() {
     <section class="section">
       <h2>Board-visible fragility</h2>
       <ul>${risks}</ul>
-    </section>`,
+    </section>
+    ${productDepthSection()}
+    ${commonPatternSection()}`,
     "Board-ready path-resilience scorecard for exposing fragile decision paths, weak recovery, and where reinforcement belongs first."
   );
 }

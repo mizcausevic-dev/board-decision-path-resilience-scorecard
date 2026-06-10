@@ -29,6 +29,16 @@ async function main() {
     assert.equal(response.status, 200, `Expected ${route} to return 200`);
     const body = await response.text();
     assert.match(body, /Board Decision Path Resilience Scorecard|Resilience lanes|Failure thresholds|Reinforcement posture/);
+    if (route === "/") {
+      for (const marker of [
+        "Product depth",
+        "What these repos have in common",
+        "portfolio.kineticgain.com",
+        "board-decision-path-resilience-scorecard"
+      ]) {
+        assert.ok(body.includes(marker), `Expected overview to include ${marker}`);
+      }
+    }
   }
 
   for (const route of apiRoutes) {
