@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: deploy-board-decision-path-resilience-scorecard
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build-deploy:
@@ -49,6 +49,10 @@ jobs:
           fi
           echo "DEPLOY_DIR=$DEPLOY_DIR" >> $GITHUB_ENV
           test -f "$DEPLOY_DIR/index.html" || (echo "FAIL: $DEPLOY_DIR/index.html missing" && exit 1)
+          grep -q "Product depth" "$DEPLOY_DIR/index.html" || (echo "FAIL: product depth section missing" && exit 1)
+          grep -q "What these repos have in common" "$DEPLOY_DIR/index.html" || (echo "FAIL: common proof pattern missing" && exit 1)
+          grep -q "portfolio.kineticgain.com" "$DEPLOY_DIR/index.html" || (echo "FAIL: portfolio footer link missing" && exit 1)
+          grep -q "board-decision-path-resilience-scorecard" "$DEPLOY_DIR/index.html" || (echo "FAIL: repo link missing" && exit 1)
 
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
