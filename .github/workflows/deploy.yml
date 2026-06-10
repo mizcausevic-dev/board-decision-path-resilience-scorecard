@@ -55,7 +55,7 @@ jobs:
           grep -q "board-decision-path-resilience-scorecard" "$DEPLOY_DIR/index.html" || (echo "FAIL: repo link missing" && exit 1)
 
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
